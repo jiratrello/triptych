@@ -4,56 +4,39 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
 
+	Camera myCam;
+
 	Skybox mySky;
+
+	float myFov;
 
 	CameraVariables camVars;
 
-	// Use this for initialization
 	void Start () {
-		
+
+		myCam = GetComponent<Camera> ();
+
 		mySky = GetComponent<Skybox> ();
 
 	}
 
 	void Update () {
 
-		if (Input.GetMouseButton(0)) {
-			FirstFunction ();
+		if (Input.GetMouseButtonDown(0)){ // if left button pressed...
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit)) {
+				// the object identified by hit.transform was clicked
+				camVars = hit.transform.GetComponent<CameraVariables> ();
+				SetCamVars ();
+			}
 		}
-
-		if (Input.GetMouseButton(1)) {
-			SecondFunction ();
-		}
-
-		if (Input.GetMouseButton(2)) {
-			ThirdFunction ();
-		}
-	}
-
-	void FirstFunction() {
-		print ("this is the first function");
-		GameObject obj = GameObject.Find ("OBJ1");
-		camVars = obj.GetComponent<CameraVariables> ();
-		SetCamVars();
-	}
-
-	void SecondFunction() {
-		print ("this is the second function");
-		GameObject obj = GameObject.Find ("OBJ2");
-		camVars = obj.GetComponent<CameraVariables> ();
-		SetCamVars();
-	}
-
-	void ThirdFunction() {
-		print ("this is the third function");
-		GameObject obj = GameObject.Find ("OBJ3");
-		camVars = obj.GetComponent<CameraVariables> ();
-		SetCamVars();
 	}
 
 	void SetCamVars () {
 		mySky.material = camVars.sky;
 
+		myCam.fieldOfView = camVars.fov;
+
 	}
-		
 }

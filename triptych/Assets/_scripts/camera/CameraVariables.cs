@@ -6,6 +6,8 @@ public class CameraVariables : MonoBehaviour {
 
 	public Material sky;
 
+	public float fov;
+
 	// Use this for initialization
 	void Start () {
 		
