@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour {
 
+	public float lookSensitivity = 5f;
+	public float xRotation;
+	public float yRotation;
+
 	Camera myCam;
-
 	Skybox mySky;
-
 	float myFov;
 
 	CameraVariables camVars;
@@ -30,6 +32,18 @@ public class PlayerCamera : MonoBehaviour {
 				camVars = hit.transform.GetComponent<CameraVariables> ();
 				SetCamVars ();
 			}
+		}
+
+		if (Input.GetKeyDown("space")){ // if right button pressed...
+			print("right button presssed");
+			Cursor.visible = false;
+
+			xRotation -= Input.GetAxis ("Mouse Y") * lookSensitivity;
+			yRotation += Input.GetAxis ("Mouse X") * lookSensitivity;
+
+			transform.rotation = Quaternion.Euler (xRotation, yRotation, 0);
+		} else if (Input.GetKeyUp ("space")) {
+			Cursor.visible = true;
 		}
 	}
 
