@@ -15,6 +15,7 @@ public class PlayerCamera : MonoBehaviour {
 	Camera myCam;
 	Skybox mySky;
 	float myFov;
+	LayerMask myMask;
 
 	void Start () {
 
@@ -44,7 +45,7 @@ public class PlayerCamera : MonoBehaviour {
 			xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
 			yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
 
-			transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+			//transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 
 		} else if (Input.GetMouseButtonUp (1)) {
 			Cursor.visible = true;
@@ -52,12 +53,15 @@ public class PlayerCamera : MonoBehaviour {
 
 		if (Input.GetMouseButton(2)) {
 			zRotation -= Input.GetAxis ("Mouse ScrollWheel") * lookSensitivity;
-			transform.rotation = Quaternion.Euler (0, 0, zRotation);
+			//transform.rotation = Quaternion.Euler (0, 0, zRotation);
 		}
+
+		transform.rotation = Quaternion.Euler (xRotation, yRotation, zRotation);
 	}
 
 	void SetCamVars () {
 		mySky.material = camVars.sky;
 		myCam.fieldOfView = camVars.fov;
+		myCam.cullingMask = LayerMask.GetMask(camVars.layers); //camVars.mask;
 	}
 }

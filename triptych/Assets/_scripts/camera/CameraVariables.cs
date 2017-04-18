@@ -8,6 +8,9 @@ public class CameraVariables : MonoBehaviour {
 
 	public float fov;
 
+	//public LayerMask mask;
+	public string[] layers;
+
 	// Use this for initialization
 	void Start () {
 		
