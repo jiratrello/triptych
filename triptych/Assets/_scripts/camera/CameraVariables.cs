@@ -11,13 +11,5 @@ public class CameraVariables : MonoBehaviour {
 	//public LayerMask mask;
 	public string[] layers;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public GameObject parent;
 }

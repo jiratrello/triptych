@@ -60,6 +60,11 @@ public class PlayerCamera : MonoBehaviour {
 	}
 
 	void SetCamVars () {
+		transform.parent = camVars.parent.transform;
+		//transform.localPosition = new Vector3(0, 0, 0);
+		//DOESNT WORK LEARN 2 LERP
+		transform.position = Vector3.Lerp(transform.position, camVars.parent.transform.position, 5);
+
 		mySky.material = camVars.sky;
 		myCam.fieldOfView = camVars.fov;
 		myCam.cullingMask = LayerMask.GetMask(camVars.layers); //camVars.mask;
